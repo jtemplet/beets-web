@@ -1,0 +1,78 @@
+{
+    // == Enforcing Options ===============================================
+    //
+    // These options tell JSHint to be more strict towards your code. Use
+    // them if you want to allow only a safe subset of JavaScript, very
+    // useful when your codebase is shared with a big number of developers
+    // with different skill levels.
+    "bitwise": true,
+    "plusplus": false,
+    "regexp": true,
+    "strict": false,
+    "trailing": false,
+    "noarg": true,
+    "eqeqeq": true,
+    "camelcase": true,
+    "curly": false,
+    "undef": true,
+    "immed": true,
+    "latedef": true,
+    "newcap": true,
+    "nonew": true,
+    "quotmark": "single",
+    "unused": false,
+    "maxdepth": 6,
+    "maxstatements": 12,
+    "maxcomplexity": false,
+    "supernew": true,
+    "sub": true,
+    // == Relaxing Options ================================================
+    //
+    // These options allow you to suppress certain types of warnings. Use
+    // them only if you are absolutely positive that you know what you are
+    // doing.
+    //"es5": true,
+    "esnext": true,
+
+    // == Environments ====================================================
+    //
+    // These options pre-define global variables that are exposed by
+    // popular JavaScript libraries and runtime environments—such as
+    // browser or node.js.
+
+    "browser"       : true,     // Standard browser globals e.g. `window`, `document`.
+    "couch"         : false,    // Enable globals exposed by CouchDB.
+    "devel"         : false,    // Alloqw development statements e.g. `console.log();`.
+    "dojo"          : false,    // Enable globals exposed by Dojo Toolkit.
+    "jquery"        : false,    // Enable globals exposed by jQuery JavaScript library.
+    "mootools"      : false,    // Enable globals exposed by MooTools JavaScript framework.
+    "node"          : false,    // Enable globals available when code is running inside of the NodeJS runtime environment.
+    "nonstandard"   : false,    // Define non-standard but widely adopted globals such as escape and unescape.
+    "prototypejs"   : false,    // Enable globals exposed by Prototype JavaScript framework.
+    "rhino"         : false,    // Enable globals available when your code is running inside of the Rhino runtime environment.
+    "wsh"           : false,    // Enable globals available when your code is running as a script for the Windows Script Host.
+
+    // == JSLint Legacy ===================================================
+    //
+    // These options are legacy from JSLint. Aside from bug fixes they will
+    // not be improved in any way and might be removed at any point.
+    "white": false,
+
+    // == Undocumented Options ============================================
+    //
+    // While I've found these options in [example1][2] and [example2][3]
+    // they are not described in the [JSHint Options documentation][4].
+    //
+    // [4]: http://www.jshint.com/options/
+    "indent": 4,
+    "predef": [
+        "define",
+        "require",
+        "requirejs",
+        "window"
+    ],
+    "globals": {
+        "$": false,
+        "jQuery": false
+    }
+}
