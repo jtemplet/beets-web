@@ -1,6 +1,8 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var template = require('../templates/shell.hbs');
+var shellTemplate = require('../templates/shell.hbs');
+var topBarTemplate = require('../templates/top-bar-nav.hbs');
+var sidebarTemplate = require('../templates/sidebar.hbs');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
@@ -10,7 +12,10 @@ module.exports = Backbone.View.extend({
   },
 
   render: function(){
-    $('body').prepend(template());
+    $('#wrapper').html(shellTemplate());
+    console.log('prepend to wrapper')
+    $('#_shell').append(topBarTemplate());
+    $('#_shell').append(sidebarTemplate());
     //this.$el.html(template());
     return this;
   }
