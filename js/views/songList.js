@@ -5,13 +5,13 @@ Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
   initialize: function(){
-    console.log('shellView::initialize()')
+    console.log('songList::initialize()')
     this.render();
   },
 
   render: function(){
-    $('#wrapper').html(template());
-    console.log('prepend to wrapper')
+    $('#page-wrapper').html(template());
+    console.log('render songList')
     //this.$el.html(template());
     return this;
   }

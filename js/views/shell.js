@@ -13,10 +13,10 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     $('#wrapper').html(shellTemplate());
-    console.log('prepend to wrapper')
     $('#_shell').append(topBarTemplate());
     $('#_shell').append(sidebarTemplate());
     //this.$el.html(template());
+    console.log('rendered shell template');
     return this;
   }
 });
