@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "beefy js/index.js:bundle.js --live",
-    "build": "browserify js/index.js -o bundle.js"
+    "start": "beefy app/js/index.js:bundle.js --live",
+    "build": "browserify app/js/index.js -o bundle.js"
   },
   "author": "jtemple77@gmail.com",
   "license": "ISC",
