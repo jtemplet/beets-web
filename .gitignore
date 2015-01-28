@@ -4,4 +4,3 @@ dist
 test/bower_components
 .DS_Store
 bundle.js
-node_modules
