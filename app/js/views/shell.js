@@ -15,6 +15,7 @@ module.exports = Backbone.View.extend({
     $('#wrapper').html(shellTemplate());
     $('#_shell').append(topBarTemplate());
     $('#_shell').append(sidebarTemplate());
+    //$('#wrapper').append("<div id='page-wrapper'></div>");
     //this.$el.html(template());
     console.log('rendered shell template');
     return this;
