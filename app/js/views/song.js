@@ -5,17 +5,14 @@ Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
 
-  tagName: 'li',
-
   initialize: function(){
-    console.log('songList::initialize()')
+    console.log('song::initialize()')
     this.render();
   },
 
   render: function(){
-    //$('#page-wrapper').html(template());
-    console.log('render songList')
-    this.$el.html(template(this.model));
+    $('#dataTableBody').append(template(this.model));
+    console.log('song: ' + JSON.stringify(this.model));
     return this;
   }
 });

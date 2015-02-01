@@ -1,22 +1,28 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 var template = require('../templates/songList.hbs');
+var SongView = require('./song');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
 
+  collection: arrSongs,
+
+  tagName: 'tbody',
 
   initialize: function(){
     console.log('songList::initialize()')
     this.render();
-    //this.collection.on('reset', this.render, this);
   },
 
   render: function(){
-    $('#page-wrapper').append(template());
     console.log('render songList');
-    console.log(arrSongs);
-    //this.$el.html(template(arrSongs));
+    $('#page-wrapper').append(template());
+
+    var sv;
+    arrSongs.forEach(function(song) {
+      sv = new SongView({ model: song });
+    }, this);
     return this;
   }
 });
