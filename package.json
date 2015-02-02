@@ -13,10 +13,13 @@
     "backbone": "~1.1.0",
     "handlebars": "^2.0.0",
     "handlebars-runtime": "^1.0.12",
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "lodash": "^3.0.1"
   },
   "browserify": {
-    "transform": [ "hbsfy" ]
+    "transform": [
+      "hbsfy"
+    ]
   },
   "devDependencies": {
     "beefy": "^2.1.2",

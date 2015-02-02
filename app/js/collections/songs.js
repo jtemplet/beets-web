@@ -5,15 +5,17 @@ module.exports = Backbone.Collection.extend({
     // Reference to this collection's model.
     model: Song,
 
-    url: '/songs'
+    url: '../../../test/data/songs.json',
 
     // Filter down the list of all todo items that are finished.
     completed: function () {
+      console.log('songs::collections::completed()');
       return this.where({completed: true});
     },
 
     // Filter down the list to only todo items that are still not finished.
     remaining: function () {
+      console.log('songs::collections::remaining()');
       return this.where({completed: false});
     },
 

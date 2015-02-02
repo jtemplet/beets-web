@@ -5,6 +5,8 @@ module.exports = Backbone.Collection.extend({
     // Reference to this collection's model.
     model: Artist,
 
+    url: '../../../test/data/artists.json',
+
     // Filter down the list of all todo items that are finished.
     completed: function () {
       return this.where({completed: true});

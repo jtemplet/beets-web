@@ -6,13 +6,13 @@ Backbone.$ = $;
 module.exports = Backbone.View.extend({
 
   initialize: function(){
-    console.log('song::initialize()')
+    //console.log('song::initialize()');
     this.render();
   },
 
   render: function(){
     $('#dataTableBody').append(template(this.model));
-    console.log('song: ' + JSON.stringify(this.model));
+    //console.log('song: ' + JSON.stringify(this.model));
     return this;
   }
 });
