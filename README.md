@@ -8,7 +8,6 @@ by going here: http://nodejs.org/
 
 #Development
 
-npm run-script build
 npm start
 
 
@@ -70,7 +69,7 @@ ln -s beetsplug/web/static ../beets-web
 beet web
 ```
 
-Note: If you are tweaking the Javascript, you have to do a npm run-script build to update the bundle.js to view the updated code in the browser
+Note: If you are tweaking the Javascript, you have to do a 'npm run-script build' to update the bundle.js to view the updated code in the browser
 
 
 
