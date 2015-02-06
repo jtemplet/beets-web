@@ -1,12 +1,12 @@
 //var _ = require('underscore');
 var Backbone = require('backbone');
 var $ = require('jquery');
-var ShellView = require('../views/shell');
+var AppView = require('../views/app');
 //var SongView = require('../views/song');
 var SongListView = require('../views/songList');
 //var ArtistView = require('../views/artist');
 //var AlbumView = require('../views/artist');
-var DashboardView = require('../views/dashboard');
+
 var Artist = require('../models/artist');
 var Album = require('../models/album');
 var Song = require('../models/song');
@@ -25,21 +25,21 @@ var router = Backbone.Router.extend({
 
   initialize: function () {
     console.log('router::initialize()');
-    this.shellView = new ShellView(this);
+    this.appView = new AppView(this);
   },
 
   dashboard: function () {
     console.log('router::dashboard()');
     // Since the home view never changes, we instantiate it and render it only once
-    if (!this.dashboardView) {
-      this.dashboardView = new DashboardView();
-      this.dashboardView.render();
-    } else {
-      console.log('reusing home view');
-      //this.dashboardView.delegateEvents(); // delegate events when the view is recycled
-    }
+    //if (!this.dashboardView) {
+    //  this.dashboardView = new DashboardView();
+    //  this.dashboardView.render();
+    //} else {
+    //  console.log('reusing home view');
+    //  //this.dashboardView.delegateEvents(); // delegate events when the view is recycled
+    //}
     //this.$content.html(directory.homelView.el);
-    //directory.shellView.selectMenuItem('home-menu');
+    //directory.appView.selectMenuItem('home-menu');
   },
 
   artistList: function() {

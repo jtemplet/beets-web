@@ -6,12 +6,12 @@ Backbone.$ = $;
 module.exports = Backbone.View.extend({
 
   initialize: function(){
-
+    console.log('recentEvents::initialize()');
   },
 
   render: function(){
     console.log('recentEventsView::render()');
-    $('#page-wrapper').append(recentEventsTemplate());
+    $('#dashboard-content').html(recentEventsTemplate());
     return this;
   }
 });

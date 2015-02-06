@@ -6,4 +6,4 @@ var Router = require('./routers/router');
 
 var router = new Router();
 Backbone.history.start();
-router.navigate('', {trigger: true});
+//router.navigate('', {trigger: true});
