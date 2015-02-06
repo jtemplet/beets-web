@@ -14,8 +14,10 @@ var Song = require('../models/song');
 var router = Backbone.Router.extend({
 
   routes: {
-    "":                "dashboard",
+    "":                 "dashboard",
+    "artists":          "artistList",
     "artists/:id":      "artistDetails",
+    "albums":           "albumList",
     "albums/:id":       "albumDetails",
     "songs":            "songList",
     "songs/:id":        "songDetails"
@@ -23,7 +25,7 @@ var router = Backbone.Router.extend({
 
   initialize: function () {
     console.log('router::initialize()');
-    this.shellView = new ShellView();
+    this.shellView = new ShellView(this);
   },
 
   dashboard: function () {
@@ -40,6 +42,10 @@ var router = Backbone.Router.extend({
     //directory.shellView.selectMenuItem('home-menu');
   },
 
+  artistList: function() {
+    console.log('router::artistList()');
+  },
+
   artistDetails: function (id) {
     console.log('router::artistDetails()');
     var artist = new Artist({id: id});
@@ -49,6 +55,10 @@ var router = Backbone.Router.extend({
         console.log(data);
       }
     });
+  },
+
+  albumList: function() {
+    console.log('router::albumList()');
   },
 
   albumDetails: function (id) {

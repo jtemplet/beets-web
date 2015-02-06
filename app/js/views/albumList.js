@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var template = require('../templates/songList.hbs');
-var SongView = require('./song');
+var template = require('../templates/albumList.hbs');
+var AlbumView = require('./album');
 var _ = require('lodash');
 Backbone.$ = $;
 
@@ -10,13 +10,13 @@ module.exports = Backbone.View.extend({
   tagName: '#dataTableBody',
 
   initialize: function(){
-    console.log('songList::initialize()');
+    console.log('albumList::initialize()');
 
     this.render();
   },
 
   render: function(eventName){
-    console.log('songList::render()');
+    console.log('albumList::render()');
 
     // writes the table template to the DOM
     $('#page-wrapper').append(template());
@@ -25,10 +25,10 @@ module.exports = Backbone.View.extend({
     var sv;
     if (this.collection.models[0] && this.collection.models[0].attributes)
       this.collection.models = this.collection.models[0].attributes.items;
-    _.each(this.collection.models, function(song){
-          //var profileTemplate = this.template(profile.toJSON());
-          //$(this.el).append(profileTemplate);
-          sv = new SongView({ model: song });
+    _.each(this.collection.models, function(album){
+      //var profileTemplate = this.template(profile.toJSON());
+      //$(this.el).append(profileTemplate);
+      av = new AlbumView({ model: album });
     }, this);
 
     return this;

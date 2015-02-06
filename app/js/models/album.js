@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 
 module.export = Backbone.Model.extend({
 
-        url: '/album',
+/*        url: '/album',      */
 
         initialize: function() {
         },

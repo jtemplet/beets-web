@@ -82,10 +82,7 @@ module.exports = Backbone.Model.extend({
         'bitdepth':    types.INTEGER,
         'channels':    types.INTEGER,
         'mtime':       DateType(),
-        'added':       DateType(),
-
-
-
+        'added':       DateType(),   --> new Date(added * 1000)
 
 
  */

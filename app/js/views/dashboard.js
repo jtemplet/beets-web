@@ -1,31 +1,28 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var template = require('../templates/dashboard.hbs');
-var SongCollection = require('../collections/songs');
-var SongListView = require('../views/songList');
+var dashboardTemplate = require('../templates/dashboard.hbs');
+var RecentsViewTemplate = require('../views/recentEventsView');
+var DashboardView = require('../views/dashboard');
 Backbone.$ = $;
+var currentView;
 
 module.exports = Backbone.View.extend({
 
     initialize: function(){
         console.log('dashboardView::initialize()');
         var self = this;
-        this.songCollection = new SongCollection();
-        var slv = new SongListView({
-            collection: this.songCollection
-        });
 
-        // When songs have been successfully grabbed, display them using songListView template
-        this.songCollection.bind('reset', function () {
-            slv.render();
-        });
-        this.songCollection.fetch({ reset: true });
+        currentView = new RecentsViewTemplate();
+
     },
 
-    render: function(){
+    render: function(view){
         console.log('dashboardView::render()')
 
-        $('#wrapper').append(template());
+        $('#wrapper').append(dashboardTemplate());
+
+        if (view) currentView = view;
+        currentView.render();
 
         //this.$el.html(template());
         return this;
