@@ -9,8 +9,6 @@ var AlbumCollection = require('../collections/albums');
 
 module.exports = Backbone.View.extend({
 
-  tagName: '#dataTableBody',
-
   initialize: function(){
     console.log('albumList::initialize()');
     var self = this;
@@ -19,7 +17,7 @@ module.exports = Backbone.View.extend({
     this.collection.bind('reset', function () {
       self.render();
     });
-    //this.collection.fetch({ reset: true });  // Causing backbone error
+    this.collection.fetch({ reset: true });  // Causing backbone error
   },
 
   render: function(eventName){
@@ -29,15 +27,17 @@ module.exports = Backbone.View.extend({
     $('#dashboard-content').html(template());
 
     // Adds all the rows of songs to the table
-    //var av;
-    //if (this.collection.models[0] && this.collection.models[0].attributes)
-    //  this.collection.models = this.collection.models[0].attributes.items;
-    //_.each(this.collection.models, function(album){
-    //  //var profileTemplate = this.template(profile.toJSON());
-    //  //$(this.el).append(profileTemplate);
-    //  av = new AlbumView({ model: album });
-    //}, this);
-
+    var av;
+    if (Array.isArray(this.collection.models) && !_.isEmpty(this.collection.models) &&
+      this.collection.models[0] && this.collection.models[0].attributes) {
+      console.log('Non-Empty collection, rendering collection');
+      this.collection.models = this.collection.models[0].attributes.albums;
+      _.each(this.collection.models, function (album) {
+        //var profileTemplate = this.template(profile.toJSON());
+        //$(this.el).append(profileTemplate);
+        av = new AlbumView({model: album});
+      }, this);
+    }
     return this;
   }
 });

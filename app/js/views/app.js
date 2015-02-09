@@ -12,9 +12,10 @@ var DashboardView = require('../views/dashboard');
 var SongListView = require('../views/songList');
 var AlbumListView = require('../views/albumList');
 var ArtistListView = require('../views/artistList');
+var RecentEventsView = require('../views/recentEvents');
 
 /*    Collections    */
-var SongCollection = require('../collections/songs');
+//var SongCollection = require('../collections/songs');
 
 module.exports = Backbone.View.extend({
 
@@ -31,22 +32,8 @@ module.exports = Backbone.View.extend({
       console.log('reusing dashboard view');
       //this.dashboardView.delegateEvents(); // delegate events when the view is recycled
     }
-    if (!this.songListView) {
-      this.songListView = new SongListView();
-    } else {
-      console.log('reusing song view');
-    }
-    if (!this.albumListView) {
-      this.albumListView = new AlbumListView();
-    } else {
-      console.log('reusing album view');
-    }
-    if (!this.artistListView) {
-      this.artistListView = new ArtistListView();
-    } else {
-      console.log('reusing artist view');
-    }
 
+    this.recentEventsView = new RecentEventsView();
     this.render();
   },
 
@@ -66,6 +53,7 @@ module.exports = Backbone.View.extend({
     console.log('app::render() - Going to render dashboard template');
 
     this.dashboardView.render();
+    this.recentEventsView.render();
     return this;
   },
 
@@ -73,19 +61,37 @@ module.exports = Backbone.View.extend({
     e.preventDefault();
     console.log('****** shell::viewArtists *****');
     e.stopPropagation();
-    this.dashboardView.render(this.artistListView);
+
+    if (!this.artistListView) {
+      this.artistListView = new ArtistListView();
+    } else {
+      console.log('reusing artist view');
+    }
+    this.artistListView.render();
   },
+
   viewAlbums: function(e) {
     e.preventDefault();
     console.log('****** shell::viewAlbums *****');
     e.stopPropagation();
-    this.dashboardView.render(this.albumListView);
+    if (!this.albumListView) {
+      this.albumListView = new AlbumListView();
+    } else {
+      console.log('reusing album view');
+    }
+    this.albumListView.render();
   },
   viewSongs: function(e) {
     e.preventDefault();
     console.log('****** shell::viewSongs *****');
     e.stopPropagation();
-    this.dashboardView.render(this.songListView);
+    if (!this.songListView) {
+
+      this.songListView = new SongListView();
+    } else {
+      console.log('reusing song view');
+    }
+    this.songListView.render();
   }
 
 });

@@ -5,7 +5,7 @@ Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
 
-  tagName: '#dataTableBody',
+  el: $('body'),   /* This is crucial  */
 
   template: template('songTemplate'),
 
@@ -14,19 +14,8 @@ module.exports = Backbone.View.extend({
     this.render();
   },
 
-  events: {
-   'click' : 'showAlert'
-
-  },
-
-  showAlert: function(){
-      alert("You clicked me");
-      console.log('song::event')
-  },
-
   render: function(){
     $('#dataTableBody').append(template(this.model));
-    //this.$el.append(template(this.model));
     //console.log('song: ' + JSON.stringify(this.model));
     return this;
   }

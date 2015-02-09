@@ -3,7 +3,7 @@ var Album = require('../models/album');
 
 module.exports = Backbone.Collection.extend({
     // Reference to this collection's model.
-    model: Album,
+/*    model: Album,   -- Leaving this commented out fixes the targetModel.prototype = undefined issue            */
 
     url: '../../../test/data/albums.json',
 

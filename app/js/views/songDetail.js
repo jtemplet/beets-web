@@ -9,11 +9,11 @@ module.exports = Backbone.View.extend({
   tagName: '#songDetail',
 
   initialize: function(){
-    console.log('songDetail::initialize()');
+    console.log('songDetailView::initialize()');
   },
 
   render: function(eventName){
-     $('#page-wrapper').html(template());
+     $('#dashboard-content').html(template());
 
     // iterate over all the properties in the song, append a <li> element to the $el element
 

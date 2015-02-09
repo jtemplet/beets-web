@@ -14,13 +14,7 @@ var Song = require('../models/song');
 var router = Backbone.Router.extend({
 
   routes: {
-    "":                 "dashboard",
-    "artists":          "artistList",
-    "artists/:id":      "artistDetails",
-    "albums":           "albumList",
-    "albums/:id":       "albumDetails",
-    "songs":            "songList",
-    "songs/:id":        "songDetails"
+    "":                 "dashboard"
   },
 
   initialize: function () {

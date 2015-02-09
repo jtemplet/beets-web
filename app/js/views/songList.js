@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend({
   tagName: '#dataTableBody',
 
   initialize: function(){
-    console.log('songList::initialize()');
+    console.log('songListView::initialize()');
     var self = this;
     this.collection = new SongCollection();
 
@@ -30,14 +30,19 @@ module.exports = Backbone.View.extend({
 
     // Adds all the rows of songs to the table
     var sv;
-    if (this.collection.models[0] && this.collection.models[0].attributes)
+    if (Array.isArray(this.collection.models) && !_.isEmpty(this.collection.models) &&
+        this.collection.models[0] && this.collection.models[0].attributes) {
+      console.log('Non-Empty collection, rendering collection');
       this.collection.models = this.collection.models[0].attributes.items;
-    _.each(this.collection.models, function(song){
-      //var profileTemplate = this.template(profile.toJSON());
-      //$(this.el).append(profileTemplate);
-      sv = new SongView({ model: song });
-    }, this);
-
+      _.each(this.collection.models, function (song) {
+        //var profileTemplate = this.template(profile.toJSON());
+        //$(this.el).append(profileTemplate);
+        sv = new SongView({model: song});
+      }, this);
+    } /*else if (_.isEmpty(this.collection.models)) {
+      console.log('Empty collection, fetching...');
+      this.collection.fetch({ reset: true });
+    } */
     return this;
   }
 });
