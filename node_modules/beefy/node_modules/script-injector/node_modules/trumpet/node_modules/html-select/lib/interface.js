@@ -61,7 +61,8 @@ Interface.prototype.createStream = function (opts) {
     
     function owrite (row, enc, next) {
         if (row[0] === 'FIRST') {
-            input.write(row);
+            if (iended) input.push(row)
+            else input.write(row);
             return next();
         }
         if (row[0] === 'LAST') {
