@@ -36,19 +36,27 @@ cd ../beets/beetsplug/web/
 mv static/ static.bak/
 ```
 Edit `__init__.py`
-Change line 154 to
+Change line 154 from:
 
+```python
+app = flask.Flask(__name__)
 ```
+to:
+```python
 app = flask.Flask(__name__, static_folder='static', static_url_path='')
 ```
 
-Change line 248 to
+Change line 248 from:
 
+```python
+return flask.render_template('index.html')
 ```
+to:
+```python
 return app.send_static_file('index.html')
 ```
 
-on line 249, add these lines
+on line 252, add these lines
 
 ```python
 @app.route('/js/<path:path>')
@@ -63,8 +71,7 @@ def css_static_proxy(path):
 ```
 
 ```
-cd  ../../../beets-web/
-cd ../beets/
+cd  ../..
 ln -s beetsplug/web/static ../beets-web
 beet web
 ```
