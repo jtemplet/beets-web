@@ -3,13 +3,14 @@ var $ = require('jquery');
 var template = require('../templates/songList.hbs');
 var SongView = require('./song');
 var _ = require('lodash');
+var moment = require('moment');
 Backbone.$ = $;
 
 var SongCollection = require('../collections/songs');
 
 module.exports = Backbone.View.extend({
 
-  tagName: '#dataTableBody',
+  el: $('body'),   /* This is crucial  */
 
   initialize: function(){
     console.log('songListView::initialize()');
@@ -37,6 +38,7 @@ module.exports = Backbone.View.extend({
       _.each(this.collection.models, function (song) {
         //var profileTemplate = this.template(profile.toJSON());
         //$(this.el).append(profileTemplate);
+        song.added_formatted = moment(new Date(song.added * 1000)).format('YYYY-MM-DD h:mm a');
         sv = new SongView({model: song});
       }, this);
     } /*else if (_.isEmpty(this.collection.models)) {

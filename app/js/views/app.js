@@ -10,6 +10,7 @@ var sidebarTemplate = require('../templates/sidebar.hbs');
 /*    Views    */
 var DashboardView = require('../views/dashboard');
 var SongListView = require('../views/songList');
+var SongDetailView = require('../views/songDetail');
 var AlbumListView = require('../views/albumList');
 var ArtistListView = require('../views/artistList');
 var RecentEventsView = require('../views/recentEvents');
@@ -40,10 +41,11 @@ module.exports = Backbone.View.extend({
   events: {
     "click a#artistsLink": "viewArtists",
     "click a#albumsLink": "viewAlbums",
-    "click a#songsLink": "viewSongs"
+    "click a#songsLink": "viewSongs",
+    "click .song": "viewSong"
   },
 
-  render: function(){
+  render: function() {
     console.log('-- rendering app view --');
     $('#wrapper').html(shellTemplate());
     $('#_shell').append(topBarTemplate());
@@ -55,6 +57,10 @@ module.exports = Backbone.View.extend({
     this.dashboardView.render();
     this.recentEventsView.render();
     return this;
+  },
+
+  viewSong: function(event) {
+    console.log(event.target.parentElement.id);
   },
 
   viewArtists: function(e) {

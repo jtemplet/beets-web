@@ -14,7 +14,8 @@
     "handlebars": "^2.0.0",
     "handlebars-runtime": "^1.0.12",
     "jquery": "~2.1.0",
-    "lodash": "^3.0.1"
+    "lodash": "^3.0.1",
+    "moment": "^2.9.0"
   },
   "browserify": {
     "transform": [

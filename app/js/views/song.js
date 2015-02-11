@@ -5,7 +5,7 @@ Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
 
-  el: $('body'),   /* This is crucial  */
+  el: $('tr'),
 
   template: template('songTemplate'),
 
