@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 
-module.export = Backbone.Model.extend({
+module.exports = Backbone.Model.extend({
 
   initialize: function() {
   },

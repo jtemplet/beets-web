@@ -12,6 +12,7 @@ var DashboardView = require('../views/dashboard');
 var SongListView = require('../views/songList');
 var SongDetailView = require('../views/songDetail');
 var AlbumListView = require('../views/albumList');
+var AlbumDetailView = require('../views/albumDetail');
 var ArtistListView = require('../views/artistList');
 var RecentEventsView = require('../views/recentEvents');
 
@@ -42,7 +43,8 @@ module.exports = Backbone.View.extend({
     "click a#artistsLink": "viewArtists",
     "click a#albumsLink": "viewAlbums",
     "click a#songsLink": "viewSongs",
-    "click .song": "viewSong"
+    "click .song": "viewSong",
+    "click .album": "viewAlbum"
   },
 
   render: function() {
@@ -63,6 +65,12 @@ module.exports = Backbone.View.extend({
     console.log(event.target.parentElement.id);
 
     this.songDetailView = new SongDetailView(event.target.parentElement.id);
+  },
+
+  viewAlbum: function(event) {
+    console.log(event.target.parentElement.id);
+
+    this.albumDetailView = new AlbumDetailView(event.target.parentElement.id);
   },
 
   viewArtists: function(e) {
@@ -89,6 +97,7 @@ module.exports = Backbone.View.extend({
     }
     this.albumListView.render();
   },
+
   viewSongs: function(e) {
     e.preventDefault();
     console.log('****** shell::viewSongs *****');

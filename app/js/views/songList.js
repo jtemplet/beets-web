@@ -23,9 +23,9 @@ module.exports = Backbone.View.extend({
     this.collection.fetch({ reset: true });
   },
 
-  render: function(eventName){
+  render: function(){
     console.log('songList::render()');
-
+    $('.page-header').text('Song List');
     // writes the table template to the DOM
     $('#dashboard-content').html(template());
 
@@ -36,15 +36,10 @@ module.exports = Backbone.View.extend({
       console.log('Non-Empty collection, rendering collection');
       this.collection.models = this.collection.models[0].attributes.items;
       _.each(this.collection.models, function (song) {
-        //var profileTemplate = this.template(profile.toJSON());
-        //$(this.el).append(profileTemplate);
         song.added_formatted = moment(new Date(song.added * 1000)).format('YYYY-MM-DD h:mm a');
         sv = new SongView({model: song});
       }, this);
-    } /*else if (_.isEmpty(this.collection.models)) {
-      console.log('Empty collection, fetching...');
-      this.collection.fetch({ reset: true });
-    } */
+    }
     return this;
   }
 });

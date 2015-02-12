@@ -3,7 +3,7 @@ var Song = require('../models/song');
 
 module.exports = Backbone.Collection.extend({
     // Reference to this collection's model.
-/*    model: Song,       */
+    model: Song,
 
     url: '../../../test/data/songs.json',
 

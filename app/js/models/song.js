@@ -2,6 +2,14 @@ var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
 
+  /*urlRoot: '../../../test/data/song.json', */
+  url : function() {
+    var base = '../../../test/data/song.json';
+    return base;
+    //if (this.isNew()) return base;
+    //return base + (base.charAt(base.length - 1) == '/' ? '' : '/') + this.id;
+  },
+
   initialize: function() {
   },
 

@@ -21,9 +21,9 @@ module.exports = Backbone.View.extend({
     this.collection.fetch({ reset: true });  // Causing backbone error
   },
 
-  render: function(eventName){
+  render: function(){
     console.log('albumList::render()');
-
+    $('.page-header').text('Album List');
     // writes the table template to the DOM
     $('#dashboard-content').html(template());
 
@@ -34,8 +34,6 @@ module.exports = Backbone.View.extend({
       console.log('Non-Empty collection, rendering collection');
       this.collection.models = this.collection.models[0].attributes.albums;
       _.each(this.collection.models, function (album) {
-        //var profileTemplate = this.template(profile.toJSON());
-        //$(this.el).append(profileTemplate);
         album.added_formatted = moment(new Date(album.added * 1000)).format('YYYY-MM-DD h:mm a');
         av = new AlbumView({model: album});
       }, this);

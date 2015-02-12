@@ -25,7 +25,7 @@ module.exports = Backbone.View.extend({
 
   render: function() {
     console.log('artistListView::render()');
-
+    $('.page-header').text('Artist List');
     // writes the table template to the DOM
     $('#dashboard-content').html(template());
 

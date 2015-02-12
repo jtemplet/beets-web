@@ -10,14 +10,18 @@ module.exports = Backbone.View.extend({
   tagName: '#songDetail',
 
   initialize: function(songId){
+    var self = this;
     console.log('songDetailView::initialize(' + songId + ')');
 
-    this.songModel = new Song();
-    this.render();
+    this.songModel = new Song({id: songId});
+    this.songModel.on('change', this.render, this);
+    this.songModel.fetch();
   },
 
   render: function(){
-     $('#dashboard-content').html(template());
+     console.log('songDetail:render()');
+     $('.page-header').text('Song Detail');
+     $('#dashboard-content').html(template(this.songModel.attributes));
 
     // iterate over all the properties in the song, append a <li> element to the $el element
 

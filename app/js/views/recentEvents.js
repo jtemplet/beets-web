@@ -19,6 +19,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     console.log('recentEventsView::render()');
+    $('.page-header').text('Recent Events');
     $('#dashboard-content').html(template());
 
     // Get all the events
