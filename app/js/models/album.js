@@ -2,13 +2,15 @@ var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
 
+  urlRoot: '/album/',
+  /*
   url : function() {
-    var base = '../../../test/data/album.json';
+    var base = '/album/';
     return base;
     //if (this.isNew()) return base;
     //return base + (base.charAt(base.length - 1) == '/' ? '' : '/') + this.id;
   },
-
+*/
   initialize: function() {
   },
 

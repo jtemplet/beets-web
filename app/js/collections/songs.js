@@ -5,7 +5,8 @@ module.exports = Backbone.Collection.extend({
     // Reference to this collection's model.
     model: Song,
 
-    url: '../../../test/data/songs.json',
+/*    url: '../../../test/data/songs.json', */
+    url: '/item',
 
     // Filter down the list of all todo items that are finished.
     completed: function () {
