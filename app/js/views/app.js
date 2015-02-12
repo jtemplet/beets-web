@@ -61,6 +61,8 @@ module.exports = Backbone.View.extend({
 
   viewSong: function(event) {
     console.log(event.target.parentElement.id);
+
+    this.songDetailView = new SongDetailView(event.target.parentElement.id);
   },
 
   viewArtists: function(e) {

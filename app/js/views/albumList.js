@@ -3,6 +3,7 @@ var $ = require('jquery');
 var template = require('../templates/albumList.hbs');
 var AlbumView = require('./album');
 var _ = require('lodash');
+var moment = require('moment');
 Backbone.$ = $;
 
 var AlbumCollection = require('../collections/albums');
@@ -35,6 +36,7 @@ module.exports = Backbone.View.extend({
       _.each(this.collection.models, function (album) {
         //var profileTemplate = this.template(profile.toJSON());
         //$(this.el).append(profileTemplate);
+        album.added_formatted = moment(new Date(album.added * 1000)).format('YYYY-MM-DD h:mm a');
         av = new AlbumView({model: album});
       }, this);
     }
