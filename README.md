@@ -1,11 +1,17 @@
 #This is still a work in progress.
 
+beets-web is the web frontend to the <a href="https://github.com/sampsyo/beets">beets media library system</a>
+
+How to get started:
+
 If you haven't installed node, do so with
-by going here: http://nodejs.org/
+by going <a href="http://nodejs.org/">to the node community website</a>
+
+Note: this has yet to be tested with <a href="https://iojs.org/en/index.html">io.js</a>
 
 #Development
 
-npm start
+> npm start
 
 
 #To Use In Conjuction with beets web plugin
@@ -73,7 +79,22 @@ ln -s beetsplug/web/static ../beets-web
 beet web
 ```
 
-Note: If you are tweaking the Javascript, you have to do a 'npm run-script build' to update the bundle.js to view the updated code in the browser
+Notes: 
+
+* If you are tweaking the Javascript, you have to do a 'npm run-script build' to update the bundle.js to view the updated code in the browser
+
+* if 
+``` 
+npm run-script build
+```
+doesn't work, remove the ./node_modules directory and then do a 
+```
+npm install
+```
+then retry
+``` 
+npm run-script build
+```
 
 
 
