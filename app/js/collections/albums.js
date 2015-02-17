@@ -5,8 +5,8 @@ module.exports = Backbone.Collection.extend({
     // Reference to this collection's model.
     model: Album,   /*-- Leaving this commented out fixes the targetModel.prototype = undefined issue            */
 
-/*    url: '../../../test/data/albums.json', */
-    url: '/album',
+    url: '../../../test/data/albums.json',
+/*    url: '/album',  */
 
     // Filter down the list of all todo items that are finished.
     completed: function () {
