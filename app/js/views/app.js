@@ -15,6 +15,8 @@ var AlbumListView = require('../views/albumList');
 var AlbumDetailView = require('../views/albumDetail');
 var ArtistListView = require('../views/artistList');
 var RecentEventsView = require('../views/recentEvents');
+require('underscore');
+require('lunr');
 
 /*    Collections    */
 //var SongCollection = require('../collections/songs');

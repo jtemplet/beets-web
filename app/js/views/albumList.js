@@ -1,43 +1,58 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var template = require('../templates/albumList.hbs');
+
 var AlbumView = require('./album');
 var _ = require('lodash');
 var moment = require('moment');
-Backbone.$ = $;
+var BackgridPaginator = require('../../../lib/backgrid-paginator');
+var BackgridFilter = require('../../../lib/backgrid-filter');
+var BackgridSelectAll = require('../../../lib/backgrid-select-all');
+var PageableAlbumCollection = require('../collections/albums');
 
-var AlbumCollection = require('../collections/albums');
+Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
 
   initialize: function(){
     console.log('albumList::initialize()');
     var self = this;
-    this.collection = new AlbumCollection();
+    self.pageableAlbumCollection = new PageableAlbumCollection();
+    self.pageableAlbumGrid = require('../grids/pageableAlbumGrid')(self.pageableAlbumCollection);
 
-    this.collection.bind('reset', function () {
-      self.render();
+    self.paginator = new BackgridPaginator.Paginator({
+      collection: self.pageableAlbumCollection
     });
-    this.collection.fetch({ reset: true });  // Causing backbone error
+
+    // Initialize a client-side filter to filter on the client
+    // mode pageable collection's cache.
+    self.filter = new BackgridFilter.ClientSideFilter({
+      collection: self.pageableAlbumCollection,
+      fields: ['albumartist', 'album', 'label', 'genre']
+    });
   },
 
   render: function(){
     console.log('albumList::render()');
     $('.page-header').text('Album List');
-    // writes the table template to the DOM
-    $('#dashboard-content').html(template());
 
-    // Adds all the rows of songs to the table
-    var av;
-    if (Array.isArray(this.collection.models) && !_.isEmpty(this.collection.models) &&
-      this.collection.models[0] && this.collection.models[0].attributes) {
-      console.log('Non-Empty collection, rendering collection');
-      this.collection.models = this.collection.models[0].attributes.albums;
-      _.each(this.collection.models, function (album) {
-        album.added_formatted = moment(new Date(album.added * 1000)).format('YYYY-MM-DD h:mm a');
-        av = new AlbumView({model: album});
-      }, this);
-    }
+    var $content = $('#dashboard-content');
+
+    // Render the filter
+    //$content.before(this.filter.render().el);
+    $content.html(this.filter.render().el);
+
+    $content.append(this.pageableAlbumGrid.render().el);
+
+    // Render the paginator
+    $content.append(this.paginator.render().el);
+
+
+
+    // Add some space to the filter and move it to the right
+    $(this.filter.el).css({float: 'right', margin: '15px'});
+    // Fetch some data
+    this.pageableAlbumCollection.fetch({reset: true});
+
     return this;
   }
 });

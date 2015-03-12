@@ -1,45 +1,61 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var template = require('../templates/songList.hbs');
+
 var SongView = require('./song');
 var _ = require('lodash');
 var moment = require('moment');
-Backbone.$ = $;
 
-var SongCollection = require('../collections/songs');
+var BackgridPaginator = require('../../../lib/backgrid-paginator');
+var BackgridFilter = require('../../../lib/backgrid-filter');
+var BackgridSelectAll = require('../../../lib/backgrid-select-all');
+var PageableSongCollection = require('../collections/songs');
+
+Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
 
-  el: $('body'),   /* This is crucial  */
+/*  el: $('body'),   /* This is crucial  */
 
   initialize: function(){
     console.log('songListView::initialize()');
     var self = this;
-    this.collection = new SongCollection();
+    self.pageableSongCollection = new PageableSongCollection();
+    self.pageableSongGrid = require('../grids/pageableSongGrid')(self.pageableSongCollection);
 
-    this.collection.bind('reset', function () {
-      self.render();
+    self.paginator = new BackgridPaginator.Paginator({
+      collection: self.pageableSongCollection
     });
-    this.collection.fetch({ reset: true });
+
+    // Initialize a client-side filter to filter on the client
+    // mode pageable collection's cache.
+    self.filter = new BackgridFilter.ClientSideFilter({
+      collection: self.pageableSongCollection,
+      fields: ['artist', 'album', 'title']
+    });
   },
 
   render: function(){
     console.log('songList::render()');
     $('.page-header').text('Song List');
-    // writes the table template to the DOM
-    $('#dashboard-content').html(template());
 
-    // Adds all the rows of songs to the table
-    var sv;
-    if (Array.isArray(this.collection.models) && !_.isEmpty(this.collection.models) &&
-        this.collection.models[0] && this.collection.models[0].attributes) {
-      console.log('Non-Empty collection, rendering collection');
-      this.collection.models = this.collection.models[0].attributes.items;
-      _.each(this.collection.models, function (song) {
-        song.added_formatted = moment(new Date(song.added * 1000)).format('YYYY-MM-DD h:mm a');
-        sv = new SongView({model: song});
-      }, this);
-    }
+    var $content = $('#dashboard-content');
+
+
+    // Render the filter
+    //$content.before(this.filter.render().el);
+    $content.html(this.filter.render().el);
+
+    $content.append(this.pageableSongGrid.render().el);
+
+    // Render the paginator
+    $content.append(this.paginator.render().el);
+
+
+    // Add some space to the filter and move it to the right
+    $(this.filter.el).css({float: 'right', margin: '15px'});
+    // Fetch some data
+    this.pageableSongCollection.fetch({reset: true});
+
     return this;
   }
 });

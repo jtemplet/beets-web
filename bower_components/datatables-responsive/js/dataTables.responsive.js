@@ -1,11 +1,11 @@
-/*! Responsive 1.0.3
+/*! Responsive 1.0.4
  * 2014 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     Responsive
  * @description Responsive tables plug-in for DataTables
- * @version     1.0.3
+ * @version     1.0.4
  * @file        dataTables.responsive.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -616,7 +616,11 @@ Responsive.prototype = {
 			$(clone).appendTo( clonedBody );
 		} );
 
-		var cells        = dt.columns().header().to$().clone( false ).wrapAll('tr').appendTo( clonedHeader );
+		var cells = dt.columns().header().to$().clone( false );
+		$('<tr/>')
+			.append( cells )
+			.appendTo( clonedHeader );
+
 		var inserted     = $('<div/>')
 			.css( {
 				width: 1,
@@ -716,10 +720,14 @@ Responsive.defaults = {
 				var cellData = dtPrivate.oApi._fnGetCellData(
 					dtPrivate, idx.row, idx.column, 'display'
 				);
+				var title = header.text();
+				if ( title ) {
+					title = title + ':';
+				}
 
 				return '<li data-dtr-index="'+idx.column+'">'+
 						'<span class="dtr-title">'+
-							header.text()+':'+
+							title+
 						'</span> '+
 						'<span class="dtr-data">'+
 							cellData+
@@ -749,15 +757,6 @@ Api.register( 'responsive()', function () {
 	return this;
 } );
 
-Api.register( 'responsive.recalc()', function () {
-	this.iterator( 'table', function ( ctx ) {
-		if ( ctx._responsive ) {
-			ctx._responsive._resizeAuto();
-			ctx._responsive._resize();
-		}
-	} );
-} );
-
 Api.register( 'responsive.index()', function ( li ) {
 	li = $(li);
 
@@ -767,6 +766,23 @@ Api.register( 'responsive.index()', function ( li ) {
 	};
 } );
 
+Api.register( 'responsive.rebuild()', function () {
+	return this.iterator( 'table', function ( ctx ) {
+		if ( ctx._responsive ) {
+			ctx._responsive._classLogic();
+		}
+	} );
+} );
+
+Api.register( 'responsive.recalc()', function () {
+	return this.iterator( 'table', function ( ctx ) {
+		if ( ctx._responsive ) {
+			ctx._responsive._resizeAuto();
+			ctx._responsive._resize();
+		}
+	} );
+} );
+
 
 /**
  * Version information
@@ -774,7 +790,7 @@ Api.register( 'responsive.index()', function ( li ) {
  * @name Responsive.version
  * @static
  */
-Responsive.version = '1.0.3';
+Responsive.version = '1.0.4';
 
 
 $.fn.dataTable.Responsive = Responsive;

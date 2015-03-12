@@ -1,55 +1,57 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var template = require('../templates/artistList.hbs');
+
 var ArtistView = require('./artist');
 var _ = require('lodash');
 Backbone.$ = $;
 
-var ArtistCollection = require('../collections/artists');
+var BackgridPaginator = require('../../../lib/backgrid-paginator');
+var BackgridFilter = require('../../../lib/backgrid-filter');
+var BackgridSelectAll = require('../../../lib/backgrid-select-all');
+
+var PageableArtistCollection = require('../collections/artists');
 
 module.exports = Backbone.View.extend({
-
+/*
   tagName: '#dataTableBody',
-
+*/
   initialize: function(){
     console.log('artistListView::init()');
     var self = this;
-    this.collection = new ArtistCollection();
+    self.pageableArtistCollection = new PageableArtistCollection();
+    self.pageableArtistGrid = require('../grids/pageableArtistGrid')(self.pageableArtistCollection);
 
-    this.collection.bind('reset', function () {
-      self.render();
+    self.paginator = new BackgridPaginator.Paginator({
+      collection: self.pageableArtistCollection
     });
 
-    this.collection.fetch({ reset: true });
+    // Initialize a client-side filter to filter on the client
+    // mode pageable collection's cache.
+    self.filter = new BackgridFilter.ClientSideFilter({
+      collection: self.pageableArtistCollection,
+      fields: ['artist']
+    });
   },
 
   render: function() {
     console.log('artistListView::render()');
     $('.page-header').text('Artist List');
     // writes the table template to the DOM
-    $('#dashboard-content').html(template());
+    var $content = $('#dashboard-content');
 
-    var av;
-    if (Array.isArray(this.collection.models) && !_.isEmpty(this.collection.models) &&
-      this.collection.models[0] && this.collection.models[0].attributes) {
-      this.collection.models = this.collection.models[0].attributes.artist_names;
-      _.each(this.collection.models, function (artist) {
-        //var profileTemplate = this.template(profile.toJSON());
-        //$(this.el).append(profileTemplate);
-        av = new ArtistView({model: artist});
-      }, this);
-    }
-/*
-    if (Array.isArray(this.collection.models) && !_.isEmpty(this.collection.models) &&
-        this.collection.models[0] &&
-        this.collection.models[0].attributes)
-      this.collection.models = this.collection.models[0].attributes.artists;
-    _.each(this.collection.models, function(artist){
-      //var profileTemplate = this.template(profile.toJSON());
-      //$(this.el).append(profileTemplate);
-      av = new ArtistView({ model: artist });
-    }, this);
-*/
+    // Render the filter
+    $content.html(this.filter.render().el);
+
+    $content.append(this.pageableArtistGrid.render().el);
+
+    // Render the paginator
+    $content.append(this.paginator.render().el);
+
+    // Add some space to the filter and move it to the right
+    $(this.filter.el).css({float: 'right', margin: '15px'});
+    // Fetch some data
+    this.pageableArtistCollection.fetch({reset: true});
+
     return this;
   }
 });
