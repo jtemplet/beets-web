@@ -6,8 +6,8 @@ module.exports = Backbone.PageableCollection.extend({
   // Reference to this collection's model.
   model: Album,
 
-  url: '../../../test/data/albums.json',
-  /*    url: '/album',  */
+/*  url: '../../../test/data/albums.json',  */
+  url: '/album',
 
   state: {
     pageSize: 15
