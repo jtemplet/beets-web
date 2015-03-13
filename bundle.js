@@ -7,7 +7,7 @@ module.exports = Backbone.PageableCollection.extend({
   // Reference to this collection's model.
   model: Album,
 
-  url: '../../../test/data/albums.json',
+  url: '../../../beets-web/test/data/albums.json',
   /*    url: '/album',  */
 
   state: {
@@ -50,7 +50,7 @@ module.exports = Backbone.PageableCollection.extend({
   // Reference to this collection's model.
   model: Artist,
 
-  url: '../../../test/data/songs.json',
+  url: '../../../beets-web/test/data/songs.json',
   /*    url: '/item', */
 
   state: {
@@ -97,7 +97,7 @@ module.exports = Backbone.PageableCollection.extend({
   // Reference to this collection's model.
   model: Song,
 
-  url: '../../../test/data/songs.json',
+  url: '../../../beets-web/test/data/songs.json',
   /*    url: '/item', */
 
   state: {
