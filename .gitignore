@@ -1,6 +1,4 @@
-dist
 .tmp
 .sass-cache
 test/bower_components
 .DS_Store
-bundle.js
