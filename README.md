@@ -14,7 +14,7 @@ Note: this has yet to be tested with <a href="https://iojs.org/en/index.html">io
 > npm start
 
 
-#To Use In Conjuction with beets web plugin
+#To Use In Conjunction with beets web plugin
 
 To use:
 
